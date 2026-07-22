@@ -27,6 +27,8 @@ def animal_by_id(id):
     response_body += f'<ul>Zookeeper: {animal.zookeeper.name}</ul>'
     response_body += f'<ul>Enclosure: {animal.enclosure.environment}</ul>'
 
+    response_body = AnimalSchema().dump(animal)
+
     return make_response(response_body)
 
 
@@ -41,6 +43,8 @@ def zookeeper_by_id(id):
     for animal in zookeeper.animals:
         response_body += f'<ul>Animal: {animal.name}</ul>'
 
+    response_body = ZookeeperSchema().dump(zookeeper)
+
     return make_response(response_body)
 
 
@@ -54,6 +58,9 @@ def enclosure_by_id(id):
 
     for animal in enclosure.animals:
         response_body += f'<ul>Animal: {animal.name}</ul>'
+
+
+    response_body = EnclosureSchema().dump(enclosure)
 
     return make_response(response_body)
 

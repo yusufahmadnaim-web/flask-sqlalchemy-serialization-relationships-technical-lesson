@@ -14,7 +14,7 @@ metadata = MetaData(naming_convention=convention)
 
 db = SQLAlchemy(metadata=metadata)
 
-class Animal(db.Model):
+class Animal(Schema):
     __tablename__ = 'animals'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -31,7 +31,7 @@ class Animal(db.Model):
         return f'<Animal {self.name}, a {self.species}>'
 
 
-class Zookeeper(db.Model):
+class Zookeeper(Schema):
     __tablename__ = 'zookeepers'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -40,8 +40,11 @@ class Zookeeper(db.Model):
 
     animals = db.relationship('Animal', back_populates='zookeeper')
 
+    class EnclosureSchema(Schema):
+     pass
 
-class Enclosure(db.Model):
+
+class Enclosure(Schema):
     __tablename__ = 'enclosures'
 
     id = db.Column(db.Integer, primary_key=True)
